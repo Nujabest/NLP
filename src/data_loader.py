@@ -49,3 +49,51 @@ def load_texts(df: pd.DataFrame, text_root: str = TEXT_ROOT) -> pd.DataFrame:
     df = df[df["text"].notna()].copy().reset_index(drop=True)
     df["year"] = df["date"].dt.year
     return df
+
+
+EMBEDDINGS_ROOT = "data/embeddings"
+
+
+def compute_and_save_embeddings(
+    docs: list,
+    name: str,
+    model_name: str = "paraphrase-multilingual-MiniLM-L12-v2",
+    batch_size: int = 64,
+    embeddings_root: str = EMBEDDINGS_ROOT,
+) -> np.ndarray:
+    """Calcule les embeddings avec SentenceTransformer et les sauvegarde en .npy.
+
+    Args:
+        docs: Liste de textes à encoder.
+        name: Nom du fichier de sauvegarde (sans extension).
+        model_name: Modèle SentenceTransformer à utiliser.
+        batch_size: Taille des batchs pour l'encodage.
+        embeddings_root: Dossier de sauvegarde.
+
+    Returns:
+        Les embeddings calculés.
+    """
+    from sentence_transformers import SentenceTransformer
+
+    os.makedirs(embeddings_root, exist_ok=True)
+    out_path = os.path.join(embeddings_root, f"{name}.npy")
+
+    embedding_model = SentenceTransformer(model_name)
+    embeddings = embedding_model.encode(docs, show_progress_bar=True, batch_size=batch_size)
+    np.save(out_path, embeddings)
+    print(f"Embeddings sauvegardés : {out_path}  ({embeddings.shape})")
+    return embeddings
+
+
+def load_embeddings(name: str, embeddings_root: str = EMBEDDINGS_ROOT) -> np.ndarray:
+    """Charge des embeddings depuis un fichier .npy.
+
+    Args:
+        name: Nom du fichier (sans extension).
+        embeddings_root: Dossier source.
+
+    Returns:
+        Les embeddings chargés.
+    """
+    path = os.path.join(embeddings_root, f"{name}.npy")
+    return np.load(path)

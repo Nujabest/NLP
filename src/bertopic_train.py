@@ -15,11 +15,21 @@ def build_topic_model(
     umap_n_components: int = 5,
     # HDBSCAN
     hdbscan_min_cluster_size: int = 10,
+    # Vocabulaire pré-filtré sur les docs individuels (via CountVectorizer externe)
+    vocabulary: dict = None,
 ) -> BERTopic:
-    vectorizer_model = CountVectorizer(
-        stop_words=custom_stopwords,
-        token_pattern=token_pattern,
-    )
+    # Si un vocabulaire pré-filtré est fourni, on l'utilise directement
+    # (min_df/max_df ont déjà été appliqués sur le corpus complet, pas sur les topics)
+    if vocabulary is not None:
+        vectorizer_model = CountVectorizer(
+            vocabulary=vocabulary,
+            token_pattern=token_pattern,
+        )
+    else:
+        vectorizer_model = CountVectorizer(
+            stop_words=custom_stopwords,
+            token_pattern=token_pattern,
+        )
     umap_model = UMAP(
         n_neighbors=umap_n_neighbors,
         n_components=umap_n_components,
@@ -46,18 +56,4 @@ def fit_topic_model(topic_model: BERTopic, docs: list, embeddings: np.ndarray):
     return topic_model.fit_transform(docs, embeddings)
 
 
-def reduce_outliers(
-    topic_model: BERTopic,
-    docs: list,
-    topics,
-    probs,
-    embeddings: np.ndarray,
-):
-    """Réduit les outliers (-1) par stratégie embeddings."""
-    return topic_model.reduce_outliers(
-        documents=docs,
-        topics=topics,
-        probabilities=probs,
-        embeddings=embeddings,
-        strategy="embeddings",
-    )
+ 

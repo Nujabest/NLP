@@ -21,7 +21,22 @@ CUSTOM_STOPWORDS = STOPWORDS + [
     "sich", "des", "auf", "fur", "an", "im", "nicht", "ein", "eine", "auch",
     "als", "bei", "nach", "war", "werden", "aber", "aus", "hat",
     "dass", "sie", "wird", "noch", "wie", "einem", "eines", "wir", "so", "durch",
-    "sollen", "mehr", "pouvoir", "national"
+    "sollen", "mehr", "pouvoir", "national",
+    # Partis et sigles politiques
+    "ps", "pcf", "pc", "rpr", "udf", "fn", "fn", "rpf", "mds", "mrg", "psg",
+    "mrc", "lcr", "lrc", "lutte", "ouvriere", "lo", "pse", "prt", "ptb",
+    "socialiste", "communiste", "republicain", "republicaine",
+    "gaulliste", "centriste", "rassemblement", "union",
+    # Noms de personnalités politiques
+    "mitterrand", "chirac", "giscard", "barre", "jospin", "rocard",
+    "marchais", "fabius", "mauroy", "beregovoy", "balladur",
+    # Formules rhétoriques de profession de foi
+    "cher", "madame", "monsieur", "electeur", "electrice",
+    "honneur", "confiance", "soutien", "appel", "demande",
+    "present", "futur", "avenir", "ensemble", "engagement",
+    "liste", "tete", "suppléant", "suppleant", "titulaire",
+    "gauche", "ecologiste", "pompidou", "lepen", 'jean', "pierre", "michel", 'um'
+    "francois", 'leben', 'order', 'in', 'man', 'georges', 'zeit', 'wenn', 'acker'
 ]
 
 

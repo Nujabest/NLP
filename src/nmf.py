@@ -5,18 +5,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 from src.preprocessing import CUSTOM_STOPWORDS
 
-TOPIC_LABELS = {
-    0: "Politique sociale & économique",
-    1: "Extrême droite / FN",
-    2: "Gauche ouvrière / PCF-LO",
-    3: "Écologie radicale (bruit/Alsace?)",
-    4: "Documents allemands (Alsace-Moselle)",
-    5: "Centre-droit / UDF — identité & sécu.",
-    6: "Écologie politique / Les Verts",
-    7: "Candidature locale & mandat",
-    8: "Gauche réformiste / PCF-PS",
-    9: "Anti-patronat / Lutte des classes",
-}
 
 
 def build_nmf(
@@ -31,7 +19,7 @@ def build_nmf(
     """
     tfidf_vectorizer = TfidfVectorizer(
         max_df=0.95,
-        min_df=10,
+        min_df=50,
         max_features=2000,
         stop_words=CUSTOM_STOPWORDS,
         token_pattern=token_pattern,
