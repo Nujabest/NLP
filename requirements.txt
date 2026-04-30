@@ -1,0 +1,10 @@
+numpy
+pandas
+matplotlib
+plotly
+networkx
+gensim
+scikit-learn
+bertopic
+sentence-transformers
+pyLDAvis

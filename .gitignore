@@ -1,0 +1,6 @@
+arkindex_archelec/
+
+# data : tout sauf stop_words et archelect_search
+data/*
+!data/stop_words.py
+!data/archelect_search.csv
