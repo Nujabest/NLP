@@ -33,31 +33,6 @@ def pca_coords(party_profiles: pd.DataFrame, dominant_topic: pd.Series, n_compon
     colors = [color_map[t] for t in dominant_topic]
     return coords, pca, colors, color_map, unique_topics
 
-
-def build_similarity_graph(
-    party_profiles: pd.DataFrame,
-    dominant_topic: pd.Series,
-    distr_df: pd.DataFrame,
-    color_map: dict,
-    seuil: float = 0.8,
-) -> nx.Graph:
-    """Construit un graphe de similarité cosine entre partis."""
-    sim_matrix = cosine_similarity(party_profiles.values)
-    partis = party_profiles.index.tolist()
-    G = nx.Graph()
-    for i, parti in enumerate(partis):
-        G.add_node(
-            parti,
-            topic=dominant_topic.iloc[i],
-            size=distr_df[distr_df["parti"] == parti].shape[0],
-        )
-    for i, p1 in enumerate(partis):
-        for j, p2 in enumerate(partis):
-            if i < j and sim_matrix[i, j] > seuil:
-                G.add_edge(p1, p2, weight=sim_matrix[i, j])
-    return G
-
-
 def build_analysis_df(distr_df: pd.DataFrame, df: pd.DataFrame):
     """Joint les distributions avec les métadonnées candidats.
 

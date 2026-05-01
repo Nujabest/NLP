@@ -4,3 +4,58 @@ arkindex_archelec/
 data/*
 !data/stop_words.py
 !data/archelect_search.csv
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.whl
+.installed.cfg
+
+# Environnements virtuels
+.env
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Distribution / packaging
+*.so
+*.dylib
+
+# Logs et bases de données
+*.log
+*.sqlite
+*.db
+
+# Fichiers systèmes
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Coverage et tests
+.coverage
+.pytest_cache/
+htmlcov/
+.tox/
+
+# mypy / type checkers
+.mypy_cache/
+.dmypy.json
